@@ -141,10 +141,16 @@ case "$host_cpu" in
 		AH_TEMPLATE(FLAC__CPU_IA32, [define if building for ia32/i386])
 		asm_optimisation=$asm_opt
 		;;
-	powerpc|powerpc64)
+	powerpc*|powerpc64*)
 		cpu_ppc=true
 		AC_DEFINE(FLAC__CPU_PPC)
 		AH_TEMPLATE(FLAC__CPU_PPC, [define if building for PowerPC])
+		asm_optimisation=$asm_opt
+		;;
+	powerpc64*)
+		cpu_ppc64=true
+		AC_DEFINE(FLAC__CPU_PPC64)
+		AH_TEMPLATE(FLAC__CPU_PPC64, [define if building for PowerPC64])
 		asm_optimisation=$asm_opt
 		;;
 	sparc)
@@ -157,6 +163,7 @@ esac
 AM_CONDITIONAL(FLAC__CPU_X86_64, test "x$cpu_x86_64" = xtrue)
 AM_CONDITIONAL(FLaC__CPU_IA32, test "x$cpu_ia32" = xtrue)
 AM_CONDITIONAL(FLaC__CPU_PPC, test "x$cpu_ppc" = xtrue)
+AM_CONDITIONAL(FLaC__CPU_PPC64, test "x$cpu_ppc64" = xtrue)
 AM_CONDITIONAL(FLaC__CPU_SPARC, test "x$cpu_sparc" = xtrue)
 
 if test "x$ac_cv_header_x86intrin_h" = xyes; then
