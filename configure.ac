@@ -175,6 +175,13 @@ else
 AC_DEFINE([FLAC__HAS_X86INTRIN], 0)
 fi
 
+if test x"$cpu_ppc64" = xtrue ; then
+AX_CHECK_COMPILE_FLAG([-mcpu=power9], [
+       AC_DEFINE(FLAC__HAS_POWER9)
+       AH_TEMPLATE(FLAC__HAS_POWER9, [define if compiler has power9 support])
+])
+fi
+
 case "$host" in
 	i386-*-openbsd3.[[0-3]]) OBJ_FORMAT=aoutb ;;
 	*-*-cygwin|*mingw*) OBJ_FORMAT=win32 ;;
