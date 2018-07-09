@@ -141,16 +141,19 @@ case "$host_cpu" in
 		AH_TEMPLATE(FLAC__CPU_IA32, [define if building for ia32/i386])
 		asm_optimisation=$asm_opt
 		;;
-	powerpc*|powerpc64*)
+	powerpc64|powerpc64le)
+		cpu_ppc64=true
 		cpu_ppc=true
 		AC_DEFINE(FLAC__CPU_PPC)
 		AH_TEMPLATE(FLAC__CPU_PPC, [define if building for PowerPC])
-		asm_optimisation=$asm_opt
-		;;
-	powerpc64*)
-		cpu_ppc64=true
 		AC_DEFINE(FLAC__CPU_PPC64)
 		AH_TEMPLATE(FLAC__CPU_PPC64, [define if building for PowerPC64])
+		asm_optimisation=$asm_opt
+		;;
+	powerpc|powerpcle)
+		cpu_ppc=true
+		AC_DEFINE(FLAC__CPU_PPC)
+		AH_TEMPLATE(FLAC__CPU_PPC, [define if building for PowerPC])
 		asm_optimisation=$asm_opt
 		;;
 	sparc)
